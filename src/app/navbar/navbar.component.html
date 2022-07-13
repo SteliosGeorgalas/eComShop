@@ -14,16 +14,19 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
-                    </li>
+                    <ng-template #guest>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
+                        </li>
+                    </ng-template>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/cart">Shopping Cart</a>
                     </li>
                     <li ngbDropdown class="nav-item dropdown">
-                        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="offcanvasNavbarLgDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Username
+                        <a *ngIf="authService.user$ | async as user; else guest" ngbDropdownToggle class="nav-link dropdown-toggle"
+                            id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ user.displayName }}
                         </a>
                         <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">
                             <li><a class="dropdown-item" routerLink="/my/orders">My Orders</a></li>
@@ -32,7 +35,8 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" (click)="logout()" routerLink="/">Log Out</a></li>
+                            <li><a class="dropdown-item" (click)="logout()" routerLink="/">Log Out</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

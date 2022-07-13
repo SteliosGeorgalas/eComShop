@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'navbar',
@@ -7,12 +9,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  // export class NavbarComponent implements OnDestroy {
+  // always unsubscribe forFirebase with async pipe or onDestroy inteface
 
-  constructor(private afAuth: AngularFireAuth) { 
-    afAuth.authState.subscribe(x => console.log(x))
+
+  constructor(public authService: AuthService) {
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.authService.logout();
   }
 }
