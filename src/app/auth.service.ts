@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { EmailAuthProvider, FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { EmailAuthProvider, FacebookAuthProvider, GoogleAuthProvider, User } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { observable, Observable, switchMap } from 'rxjs';
-import { User } from './shared/services/user';
-import * as firebase from 'firebase/app';
+import { filter, observable, Observable, switchMap ,map} from 'rxjs';
+// import { firebase } from '@firebase/app';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-
 import { of } from 'rxjs';
 import { UserService } from './user.service';
+import { UserApp } from './models/services/user';
+import firebase from 'firebase/compat';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user$: Observable<any>;
+  // user$: firebase.User ;
+  user$ : Observable<firebase.User|null>;
   //Define custom user object
 
   constructor(
@@ -26,13 +27,24 @@ export class AuthService {
     private afs: AngularFirestore,
     private userService: UserService
   ) {
-    this.user$ =  afAuth.authState;
+
+
+
+    this.user$ = this.afAuth.authState;
+    // afAuth.authState
+    //   .subscribe(data => {
+    //     console.log('');
+    //     this.user$ = data!;
+    //   }
+    //   );
 
     //// For FireStore
     // this.user$ = afAuth.authState.pipe(switchMap(user => {
     //   console.log('User0' + (user !== null ? user.displayName : ''));
     //   if (user) {
-    //     return this.afs.doc<User>('users/${user.uid').valueChanges();
+    //     // this.user$ = user;
+    //     // return user;
+    //     return this.afs.doc<firebase.User>('users/${user.uid').valueChanges();
     //   } else {
     //     return of(undefined);
     //   }
@@ -53,7 +65,7 @@ export class AuthService {
   EmailAuth() {
     return this.AuthLogin(new EmailAuthProvider());
   }
-  AuthLogin(provider) {
+  AuthLogin(provider: any) {
     // let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/'
     // localStorage.setItem('returnUrl', returnUrl);
     // localStorage.getItem(returnUrl);
@@ -77,8 +89,8 @@ export class AuthService {
     this.afAuth.signOut();
   }
 
-  SetUserData(user) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc('users/${user.uid}');
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc('users/${user.uid}');
 
     const data = {
       uid: user.uid,

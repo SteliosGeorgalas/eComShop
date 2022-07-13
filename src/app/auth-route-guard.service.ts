@@ -13,9 +13,7 @@ export class AuthRouteGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.auth.user$.pipe(map(user => {
-      console.log("");
       if (user) return true;
-
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
       return false;
     }));
