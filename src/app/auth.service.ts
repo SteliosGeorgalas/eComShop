@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { EmailAuthProvider, FacebookAuthProvider, GoogleAuthProvider, User } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { filter, observable, Observable, switchMap ,map} from 'rxjs';
+import { Observable } from 'rxjs';
 // import { firebase } from '@firebase/app';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -11,13 +11,15 @@ import { UserService } from './user.service';
 import { UserApp } from './models/services/user';
 import firebase from 'firebase/compat';
 
+import { switchMap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   // user$: firebase.User ;
-  user$ : Observable<firebase.User|null>;
+  user$: Observable<firebase.User | null>;
   //Define custom user object
 
   constructor(
@@ -99,5 +101,13 @@ export class AuthService {
     }
 
     return userRef.set(data, { merge: true })
+  }
+
+  get userApp$(): Observable<UserApp | null> {
+    return this.user$
+      .pipe(switchMap(user => {
+        if (user) return this.userService.get(user!.uid).valueChanges();
+        return of(null);
+      }));
   }
 }

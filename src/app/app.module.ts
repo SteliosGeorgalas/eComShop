@@ -14,13 +14,18 @@ import { AuthService } from './auth.service';
 import { AuthRouteGuardService as RouteGuard } from './auth-route-guard.service';
 import { UserService } from './user.service';
 import { AdminGuardService } from './admin-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { CategoryService } from './category.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CartComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent,
+    AdminProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,8 @@ import { AdminGuardService } from './admin-guard.service';
     AuthService,
     RouteGuard,
     AdminGuardService,
-    UserService
+    UserService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
