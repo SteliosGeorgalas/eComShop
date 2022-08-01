@@ -19,6 +19,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProductService } from './product.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [
     AuthService,
