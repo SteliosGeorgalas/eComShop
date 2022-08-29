@@ -21,9 +21,10 @@ const routes: Routes = [
   { path: "order-success", component: OrderSuccessComponent, canActivate: [AuthRouteGuardService] },
   { path: "check-out", component: CheckOutComponent, canActivate: [AuthRouteGuardService] },
   { path: "my/orders", component: MyOrdersComponent, canActivate: [AuthRouteGuardService] },
-  { path: "admin/products", component: AdminProductsComponent, canActivate: [AuthRouteGuardService, AdminGuardService] },
   { path: "admin/orders", component: AdminOrdersComponent, canActivate: [AuthRouteGuardService, AdminGuardService] },
-  { path: "admin/products/new", component: ProductFormComponent, canActivate: [AuthRouteGuardService, AdminGuardService] }
+  { path: "admin/products/new", component: ProductFormComponent, canActivate: [AuthRouteGuardService, AdminGuardService] },
+  { path: "admin/products/:id", component: ProductFormComponent, canActivate: [AuthRouteGuardService, AdminGuardService] },
+  { path: "admin/products", component: AdminProductsComponent, canActivate: [AuthRouteGuardService, AdminGuardService] }
 ];
 
 @NgModule({
