@@ -20,6 +20,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CustomFormsModule } from 'ng2-validation';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DataTablesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

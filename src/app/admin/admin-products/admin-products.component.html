@@ -1,4 +1,8 @@
-<table class="table">
+<p>
+    <input #query (keyup)="filterByTitle(query.value)" class="form-control me-2" type="text" placeholder="Search..."
+        aria-label="Search">
+</p>
+<table datatable class="row-border hover">
     <thead>
         <tr>
             <th>Title</th>
@@ -7,11 +11,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of products$ | async">
+        <tr *ngFor="let p of filterProducts">
             <td>{{ p.title }}</td>
             <td>{{ p.price }}</td>
             <td>
-                <a [routerLink]="[p.$key]">Edit</a>
+                <a [routerLink]="['/admin/products/',p.key]">Edit</a>
             </td>
         </tr>
     </tbody>

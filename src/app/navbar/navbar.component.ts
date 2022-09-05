@@ -19,12 +19,13 @@ export class NavbarComponent {
 
   constructor(private authService: AuthService) {
     authService.userApp$
-    .subscribe(UserApp => {
-      return this.userApp = UserApp!;
-    });
+      .subscribe(UserApp => {
+        return this.userApp = UserApp!;
+      });
   }
 
   logout() {
     this.authService.logout();
   }
+
 }

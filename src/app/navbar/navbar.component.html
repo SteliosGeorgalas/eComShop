@@ -23,9 +23,9 @@
                         <a class="nav-link" routerLink="/cart">Shopping Cart</a>
                     </li>
                     <li ngbDropdown class="nav-item dropdown">
-                        <a *ngIf="userApp ; else guest" ngbDropdownToggle
-                            class="nav-link dropdown-toggle" id="offcanvasNavbarLgDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a *ngIf="userApp ; else guest" ngbDropdownToggle class="nav-link dropdown-toggle"
+                            id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             {{ userApp.displayName }}
                             <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">
                                 <li><a class="dropdown-item" routerLink="/my/orders">My Orders</a></li>
@@ -43,10 +43,6 @@
                         </a>
                     </li>
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </div>
