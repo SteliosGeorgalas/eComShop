@@ -2,7 +2,7 @@
     <input #query (keyup)="filterByTitle(query.value)" class="form-control me-2" type="text" placeholder="Search..."
         aria-label="Search">
 </p>
-<table datatable class="row-border hover">
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>Title</th>
@@ -13,7 +13,7 @@
     <tbody>
         <tr *ngFor="let p of filterProducts">
             <td>{{ p.title }}</td>
-            <td>{{ p.price }}</td>
+            <td>{{ p.price |currency:'EUR':true}}</td>
             <td>
                 <a [routerLink]="['/admin/products/',p.key]">Edit</a>
             </td>
