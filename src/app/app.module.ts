@@ -4,6 +4,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,27 +15,40 @@ import { AuthService } from './auth.service';
 import { AuthRouteGuardService as RouteGuard } from './auth-route-guard.service';
 import { UserService } from './user.service';
 import { AdminGuardService } from './admin-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
+import { CustomFormsModule } from 'ng2-validation';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CartComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent,
+    AdminProductsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DataTablesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [
     AuthService,
     RouteGuard,
     AdminGuardService,
-    UserService
+    UserService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
